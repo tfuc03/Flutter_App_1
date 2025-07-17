@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_1/screen/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login.dart';
-
+import 'home_screen.dart';
 
 class Register extends StatefulWidget {
   final Function(Map<String, dynamic>) onRegisterComplete;
+
   const Register({super.key, required this.onRegisterComplete});
 
   @override
@@ -20,6 +20,7 @@ class _RegisterState extends State<Register> {
   final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
   final _urlController = TextEditingController();
+
   int _gender = 0;
   bool _likeMusic = false;
   bool _likeMovie = false;
@@ -41,6 +42,7 @@ class _RegisterState extends State<Register> {
   void _handleRegister() async {
     if (_formKey.currentState!.validate()) {
       final prefs = await SharedPreferences.getInstance();
+
       await prefs.setString('name', _nameController.text);
       await prefs.setString('email', _emailController.text);
       await prefs.setString('phone', _phoneController.text);
@@ -63,11 +65,10 @@ class _RegisterState extends State<Register> {
       };
 
       widget.onRegisterComplete(userInfo);
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(userInfo: userInfo),
-        ),
+        MaterialPageRoute(builder: (context) => HomeScreen(userInfo: userInfo)),
       );
     }
   }
@@ -328,6 +329,7 @@ class _RegisterState extends State<Register> {
                                 onChanged: (value) {
                                   setState(() {
                                     _gender = value!;
+                                    print("Giới tính là: $_gender");
                                   });
                                 },
                                 contentPadding: EdgeInsets.zero,
@@ -342,6 +344,7 @@ class _RegisterState extends State<Register> {
                                 onChanged: (value) {
                                   setState(() {
                                     _gender = value!;
+                                    print("Giới tính là: $_gender");
                                   });
                                 },
                                 contentPadding: EdgeInsets.zero,
@@ -439,6 +442,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   SizedBox(height: 24),
+
                   Row(
                     children: [
                       Expanded(
@@ -448,6 +452,7 @@ class _RegisterState extends State<Register> {
                             size: 32,
                             color: Colors.white,
                           ),
+
                           onPressed: _handleRegister,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.redAccent,
@@ -478,6 +483,7 @@ class _RegisterState extends State<Register> {
                             Navigator.pop(context);
                           },
                           style: OutlinedButton.styleFrom(
+                            // foregroundColor: Colors.purple,
                             side: BorderSide(color: Colors.redAccent),
                             padding: EdgeInsets.symmetric(vertical: 15),
                             shape: RoundedRectangleBorder(
@@ -496,12 +502,15 @@ class _RegisterState extends State<Register> {
                       ),
                     ],
                   ),
+
                   SizedBox(height: 16),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Đã có tài khoản?',
+                        'Đã có tài khoản? ',
                         style: TextStyle(fontSize: 14, color: Colors.orange),
                       ),
                       TextButton(

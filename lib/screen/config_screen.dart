@@ -11,7 +11,6 @@ class _ConfigAppState extends State<ConfigApp> {
   bool light = true;
   _setMau() => light ? Colors.blue : Colors.yellow;
   _setData() => light ? "Xanh" : "Vàng";
-
   @override
   Widget build(BuildContext context) {
     return Container(

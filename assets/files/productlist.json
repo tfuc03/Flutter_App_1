@@ -1,0 +1,54 @@
+{
+    "data":
+    [    
+        {
+            "id": 1,
+            "name": "Iphone 1",
+            "price": 2100000,
+            "img": "Samsung_A03.png",
+            "des": "Samsung",
+            "catId": 1      
+        },
+        {
+            "id": 2,
+            "name": "Iphone 2",
+            "price": 2100000,
+            "img": "Samsung_A04.png",
+            "des": "Samsung",
+            "catId": 1 
+        },
+        {
+            "id": 3,
+            "name": "Samsung A05",
+            "price": 2100000,
+            "img": "Samsung_A05.png",
+            "des": "Samsung",
+            "catId": 2  
+        },
+        {
+            "id": 4,
+            "name": "Samsung A14",
+            "price": 2100000,
+            "img": "Samsung_A14.png",
+            "des": "Samsung",
+            "catId": 2  
+        },
+        {
+            "id": 5,
+            "name": "Oppo A23",
+            "price": 2100000,
+            "img": "Samsung_A23.png",
+            "des": "Samsung",
+            "catId": 3 
+        },
+        {
+            "id": 6,
+            "name": "Oppo A34",
+            "price": 2950000,
+            "img": "Samsung_A34.png",
+            "des": "Samsung",
+            "catId": 3  
+        }
+
+    ]
+}

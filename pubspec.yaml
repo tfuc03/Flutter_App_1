@@ -18,10 +18,14 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   carousel_slider: ^5.0.0
   shared_preferences: ^2.0.6 
+  intl: ^0.20.2
 flutter:
     uses-material-design: true
     assets:
       - assets/images/slider1.jpg
       - assets/images/slider2.jpg
       - assets/images/slider3.jpg
+      - assets/images/products/
+      - assets/files/
+      - assets/images/
  
