@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_1/model/product.dart';
 import '../model/product.dart';
 
 class ProductData {

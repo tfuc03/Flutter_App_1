@@ -7,9 +7,7 @@ import 'contact_screen.dart';
 import 'config_screen.dart';
 import '../config/default.dart';
 import 'register.dart';
-import 'product_grid_screen.dart';
-import 'product_list_screen.dart';
-import 'product_table_screen.dart';
+import '../widgets/app_drawer.dart';
 
 class CarouselWidget extends StatelessWidget {
   final List<Map<String, String>> items = [
@@ -200,22 +198,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Future<void> _deleteAccount() async {
-    bool confirmDelete = true;
-    if (confirmDelete) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.clear();
-      setState(() {
-        _userInfo = null;
-      });
-
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => Login()),
-        (Route route) => false,
-      );
-    }
-  }
-
   Widget _buildHomeScreen() {
     return SingleChildScrollView(
       child: Column(
@@ -239,136 +221,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('My App Flutter')),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(color: Colors.blue),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage:
-                    _userInfo != null
-                        ? NetworkImage(_userInfo!['imageUrl'])
-                        : const AssetImage('assets/images/avatar.jpg')
-                            as ImageProvider,
-              ),
-              accountName: Text(
-                _userInfo?['name'] ?? 'Chưa đăng nhập',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              accountEmail: Text(_userInfo?['email'] ?? ''),
-            ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              selected: _selectedIndex == 0,
-              onTap: () {
-                Navigator.pop(context);
-                setState(() {
-                  _selectedIndex = 0;
-                });
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.contact_phone),
-              title: const Text('Contact'),
-              selected: _selectedIndex == 1,
-              onTap: () {
-                Navigator.pop(context);
-                setState(() {
-                  _selectedIndex = 1;
-                });
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Info'),
-              selected: _selectedIndex == 2,
-              onTap: () {
-                Navigator.pop(context);
-                setState(() {
-                  _selectedIndex = 2;
-                });
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.auto_fix_high),
-              title: const Text('Config'),
-              selected: _selectedIndex == 3,
-              onTap: () {
-                Navigator.pop(context);
-                setState(() {
-                  _selectedIndex = 3;
-                });
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.list),
-              title: const Text('Sản phẩm (List)'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProductListScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.grid_on),
-              title: const Text('Sản phẩm (Grid)'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProductGridScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.table_chart),
-              title: const Text('Sản phẩm (Table)'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProductTableScreen(),
-                  ),
-                );
-              },
-            ),
-            const Divider(),
-            if (_userInfo != null)
-              ListTile(
-                leading: const Icon(Icons.delete_forever, color: Colors.red),
-                title: const Text(
-                  'Hủy tài khoản',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  _deleteAccount();
-                },
-              ),
-            ListTile(
-              leading: const Icon(Icons.exit_to_app),
-              title: const Text('Thoát'),
-              onTap: () async {
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.remove('currentUser');
-                if (!mounted) return;
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Login()),
-                  (Route route) => false,
-                );
-              },
-            ),
-          ],
-        ),
+      drawer: AppDrawer(
+        context: context,
+        userInfo: _userInfo,
+        selectedIndex: _selectedIndex,
+        onSelect: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        showSelected: true,
       ),
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
