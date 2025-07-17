@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/screen/login.dart';
 import 'package:flutter_app_1/screen/welcome.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+     await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
