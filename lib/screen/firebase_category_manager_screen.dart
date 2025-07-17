@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_1/screen/login.dart';
 import '../data/firebase_helper.dart';
 import '../widgets/app_drawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirebaseCategoryManagerScreen extends StatefulWidget {
   const FirebaseCategoryManagerScreen({super.key});
@@ -17,12 +19,41 @@ class _FirebaseCategoryManagerScreenState
   final _imageController = TextEditingController();
   String? _editingId;
   List<Map<String, dynamic>> _categories = [];
+    Map<String, dynamic>? _userInfo;
 
   @override
   void initState() {
     super.initState();
     _loadCategories();
+    _loadUserDataIfAvailable();
   }
+
+  Future<void> _loadUserDataIfAvailable() async {
+  final prefs = await SharedPreferences.getInstance();
+  final hasData = prefs.containsKey('name');
+
+  if (hasData) {
+    setState(() {
+      _userInfo = {
+        'name': prefs.getString('name') ?? 'User',
+        'email': prefs.getString('email') ?? '',
+        'phone': prefs.getString('phone') ?? '',
+        'imageUrl': prefs.getString('imageUrl') ?? '',
+        'gender': prefs.getInt('gender') ?? 0,
+        'likeMusic': prefs.getBool('likeMusic') ?? false,
+        'likeMovie': prefs.getBool('likeMovie') ?? false,
+        'likeBook': prefs.getBool('likeBook') ?? false,
+      };
+    });
+  } else {
+    // Xử lý trường hợp không có dữ liệu người dùng
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => Login()),
+    );
+  }
+}
+
 
   Future<void> _loadCategories() async {
     try {
@@ -137,7 +168,7 @@ class _FirebaseCategoryManagerScreenState
       ),
       drawer: AppDrawer(
         context: context,
-        userInfo: null,
+        userInfo: _userInfo,
         selectedIndex: null,
         showSelected: false,
       ),

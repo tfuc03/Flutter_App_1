@@ -44,10 +44,10 @@ class Welcome extends StatelessWidget {
                   child: Text("Tiếp tục"),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightGreen,
-                    fixedSize: const Size(150, 70),
+                    fixedSize: const Size(100, 50),
                   ),
                 ),
-                const SizedBox(height: 200),
+                const SizedBox(height: 150),
               ],
             ),
           ),

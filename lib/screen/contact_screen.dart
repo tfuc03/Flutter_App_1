@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
@@ -21,18 +22,22 @@ class ContactScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             _buildSocialTab(
+              context,
               'Facebook',
               Icons.facebook,
               Colors.blue,
               'Facebook',
+               Uri.parse('https://www.facebook.com/pham.nguyen.trong.phuc.2025/'),
             ),
             _buildSocialTab(
+              context,
               'Messenger',
               Icons.chat,
               Colors.blue[700]!,
               'Messenger',
+             Uri.parse('tel:+84358472483'),
             ),
-            _buildSocialTab('Other', Icons.more_horiz, Colors.grey, 'Other'),
+            _buildSocialTab(context, 'Other', Icons.more_horiz, Colors.grey, 'Other', Uri()),
           ],
         ),
       ),
@@ -40,10 +45,12 @@ class ContactScreen extends StatelessWidget {
   }
 
   Widget _buildSocialTab(
+    BuildContext context,
     String title,
     IconData icon,
     Color color,
     String description,
+    Uri url, 
   ) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -78,9 +85,23 @@ class ContactScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: () {
-                  // TODO: Implement URL launcher
+                 ElevatedButton(
+                onPressed: () async {
+                  print('Attempting to launch: $url');
+                  bool canLaunch = await canLaunchUrl(url);
+                  print('Can launch URL: $canLaunch');
+                  if (canLaunch) {
+                    print('Launching URL...');
+                    await launchUrl(
+                      url,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  } else {
+                    print('Cannot launch URL');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Could not launch $url')),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: color,
