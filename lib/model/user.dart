@@ -1,13 +1,13 @@
 class User {
-  String? fullname;
-  String? email;
-  String? gender;
-  String? favorite;
+  final String fullname;
+  final String email;
+  final String gender;
+  final String favorite;
 
 User ({
-  this.fullname,
-  this.email,
-  this.gender,
-  this.favorite,
+ required this.fullname,
+  required this.email,
+  required this.gender,
+  required this.favorite,
 });
 }

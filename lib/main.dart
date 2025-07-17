@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
-     import 'mainpage.dart';
+import 'package:flutter_app_1/screen/login.dart';
+import 'package:flutter_app_1/screen/welcome.dart';
 // import 'screen/welcome.dart';
 // import 'package:flutter/mainpage.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Mainpage(
-        // appBar: AppBar(title: Text("Tuan_01")),
-        // body: Welcome(),
+      title: 'My app Flutter',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      initialRoute: '/',
+      routes: {
+        '/welcome': (context) => const Welcome(),
+        '/login': (context) => const Login(),
+      },
+      home: Scaffold(body: Welcome()),
     );
   }
 }
+
