@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_1/screen/model/user.dart';
+import 'package:flutter_app_1/model/user.dart';
 import 'detail.dart';
 
 class Register extends StatefulWidget {
@@ -18,6 +18,7 @@ class _RegisterState extends State<Register> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   String? _gender;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,39 +109,54 @@ class _RegisterState extends State<Register> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: CheckboxListTile(
-                  title: const Text('Music'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: _checkValue1,
-                  onChanged: (value) {
-                    setState(() {
-                      _checkValue1 = value!;
-                    });
-                  },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CheckboxListTile(
+                      title: const Text('Music'),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      value: _checkValue1,
+                      onChanged: (value) {
+                        setState(() {
+                          _checkValue1 = value!;
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
               Expanded(
-                child: CheckboxListTile(
-                  title: const Text('Travel'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: _checkValue2,
-                  onChanged: (value) {
-                    setState(() {
-                      _checkValue2 = value!;
-                    });
-                  },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CheckboxListTile(
+                      title: const Text('Travel'),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      value: _checkValue2,
+                      onChanged: (value) {
+                        setState(() {
+                          _checkValue2 = value!;
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
               Expanded(
-                child: CheckboxListTile(
-                  title: const Text('Movie'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: _checkValue3,
-                  onChanged: (value) {
-                    setState(() {
-                      _checkValue3 = value!;
-                    });
-                  },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CheckboxListTile(
+                      title: const Text('Movie'),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      value: _checkValue3,
+                      onChanged: (value) {
+                        setState(() {
+                          _checkValue3 = value!;
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
             ],
