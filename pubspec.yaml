@@ -12,6 +12,18 @@ dependencies:
   cupertino_icons: ^1.0.8
   fluttertoast: ^8.2.12
   url_launcher: ^6.3.1
+  provider: ^6.1.5
+  flutter_riverpod: ^2.6.1
+  http: ^1.4.0
+  flutter_bloc: ^9.1.1
+  get: ^4.7.2
+  mobx: ^2.5.0
+  flutter_mobx: ^2.3.0
+  redux: ^5.0.0
+  flutter_redux: ^0.10.0
+  cached_network_image: ^3.4.1
+ 
+ 
    # contactFeatures
    
 
