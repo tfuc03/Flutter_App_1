@@ -1,3 +1,4 @@
+import 'package:flutter_app_1/screen/home.dart';
 import 'package:flutter_app_1/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
+        '/home': (context) => HomeScreen(),
         '/welcome': (context) => const Welcome(),
         '/login': (context) => const Login(),
       },

@@ -102,6 +102,7 @@ class CarouselWidget extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  
   final Map<String, dynamic>? userInfo;
 
   const HomeScreen({super.key, this.userInfo});
@@ -110,7 +111,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin{
+  @override
+    bool get wantKeepAlive => true;
+
+
   bool isDarkMode = false;
   int _selectedIndex = 0;
   late Map<String, dynamic>? _userInfo;
